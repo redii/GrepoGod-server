@@ -1,0 +1,5 @@
+{
+  "dburl":"noc.redii.pw",
+  "dbport":"27017",
+  "dbname":"grepogod"
+}

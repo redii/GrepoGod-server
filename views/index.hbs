@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {{> head}}
+
+  <body>
+    <div class="container">
+      <div class="row" style="height: 200px"></div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <img class="mb-3" src="/img/logo/logo-grepo.png"></img>
+          <!--<h1>GrepoGod</h1>-->
+          <p>Welcome on GrepoGod.com! Login or click world selection to continue as guest...</p>
+          <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#collapseLogin"><span class="fa fa-user"></span> Login</button>
+          <button type="button" class="btn btn-outline-primary" onclick="location.href='/worldselect'">World Selection <span class="fa fa-globe"></span></button>
+          <p class="mt-3 text-muted" style="font-size: 13px">Don't have an account? Register <a href="#">here</a>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row mt-3">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+          <div class="collapse rounded" id="collapseLogin">
+            <form>
+              <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5"></div>
+      </div>
+    </div>
+
+    {{> js}}
+
+  </body>
+</html>

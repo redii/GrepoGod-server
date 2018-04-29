@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">GrepoGod</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMobile" aria-controls="navbarMobile" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarMobile">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard/{{world}}">Home <span class="fa fa-home"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/donations/{{world}}">Donations <span class="fa fa-dollar"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">FAQ <span class="fa fa-question-circle"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact <span class="fa fa-comment"></span></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarMyWorlds" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="fa fa-globe"></span> My Worlds
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarMyWorlds">
+          <a class="dropdown-item disabled" href="/dashboard/de88">de88</a>
+          <a class="dropdown-item disabled" href="/dashboard/de89">de89</a>
+          <a class="dropdown-item disabled" href="/dashboard/de90">de90</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><span class="fa fa-cogs"></span> Settings</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link"><span class="fa fa-user"></span> Username</a>
+      </li>
+    </ul>
+  </div>
+</nav>

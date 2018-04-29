@@ -1,0 +1,28 @@
+{
+  "name": "grepogod-server",
+  "version": "1.0.0",
+  "description": "An express.js powered webserver to hosts gathered world data, rankings and other related stuff on GrepoGod.com",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redii/GrepoGod-server.git"
+  },
+  "keywords": [
+    "grepolis"
+  ],
+  "author": "Henry Akmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/redii/GrepoGod-server/issues"
+  },
+  "homepage": "https://github.com/redii/GrepoGod-server#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "handlebars.numeral": "^0.2.0",
+    "hbs": "^4.0.1",
+    "mongoose": "^5.0.16"
+  }
+}

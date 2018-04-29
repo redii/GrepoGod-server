@@ -1,0 +1,68 @@
+<!-- https://XYZ.grepolis.com/image.php?player_id=XYZ for profilepics-->
+<!DOCTYPE html>
+<html lang="en">
+
+  {{> head}}
+
+  <body>
+
+    {{> navbar}}
+
+    <div class="container">
+      <div class="row mt-5"></div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1>Player Search for {{world}}</h1>
+          <p class="text-muted" style="font-size: 13px">You can go back to your dashboard by clicking <a href="/dashboard/{{world}}">here.</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Enter Username" aria-label="Search" id="playerSearchInput">
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="playerSearch()">Search</button>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      {{#if player}} <!-- if player object was given into handlebars add this html -->
+      <div class="row mt-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{#if pic}}https://{{world}}.grepolis.com/image.php?player_id={{player.playerid}}{{/if}}s" alt="{{player.name}}'s profile picture">
+            <div class="card-body">
+              <h5 class="card-title">{{player.name}}</h5>
+              <p class="card-text">He's currently rank <strong>#{{player.rank}}</strong> on {{world}}.<br>{{#if player.allianceid}}<a href="#">{{player.allianceid}}</a>{{/if}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">{{number player.points}} <strong>points</strong></li>
+              <li class="list-group-item">{{number player.killsall}} <strong>bash</strong></li>
+              <li class="list-group-item">{{number player.killsoff}} <strong>bash off</strong></li>
+              <li class="list-group-item">{{number player.killsdef}} <strong>bash def</strong></li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Alliance Profile</a>
+              <a href="#" class="card-link disabled">Grepolis Profile</a>
+            </div>
+          </div>
+          {{/if}}
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+
+    {{> js}}
+
+    <script>
+      function playerSearch() {
+        var name = document.getElementById('playerSearchInput').value
+        window.location.href = `/playersearch/{{world}}/${name}`
+      }
+    </script>
+
+  </body>
+</html>
