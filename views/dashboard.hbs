@@ -12,7 +12,11 @@
       <div class="row">
         <div class="col-md-12 text-center">
           <h1>Dashboard for {{world}}</h1>
+          {{#if user}}
+          <p class="text-muted" style="font-size: 13px">You can edit your selected worlds by clicking <a href="/worldselect">here.</a></p>
+          {{else}}
           <p class="text-muted" style="font-size: 13px">You can go back to world selection by clicking <a href="/worldselect">here.</a></p>
+          {{/if}}
         </div>
       </div>
     </div>
@@ -26,15 +30,7 @@
               <div class="card-body">
                 <h5 class="card-title">Player Ranking</h5>
                 <p class="card-text">Get the latest player rankings for {{world}} based on bash and playerpoints.</p>
-                <br><button type="button" class="btn btn-primary buttonload" onclick="loading('1'); location.href='/playerranking/{{world}}'">Let's Go<i id="1" style="display: none" class="ml-2 fa fa-spinner fa-spin"></i></button>
-              </div>
-            </div>
-            <div class="card"><br>
-              <img class="card-img-top" src="/img/dashboard/leaderboard_a.png" alt="Alliance Leaderboards"><br>
-              <div class="card-body">
-                <h5 class="card-title">Alliance Leaderboards</h5>
-                <p class="card-text">Get the latest alliance leaderboards for {{world}} based on overall memberpoints and bash points.</p>
-                <button type="button" class="btn btn-primary buttonload" onclick="loading('2'); location.href='/test'">Let's Go<i id="2" style="display: none" class="ml-2 fa fa-spinner fa-spin"></i></button>
+                <br><button type="button" class="btn btn-primary buttonload" onclick="loading('1'); location.href='/playerranking/{{world}}'">Open<i id="1" style="display: none" class="ml-2 fa fa-spinner fa-spin"></i></button>
               </div>
             </div>
             <div class="card"><br>
@@ -42,15 +38,23 @@
               <div class="card-body">
                 <h5 class="card-title">Player Search</h5>
                 <p class="card-text">Search for a specific player on {{world}} to get some detailed stats and other useful informations.</p>
-                <br><button type="button" class="btn btn-primary buttonload" onclick="loading('3'); location.href='/playersearch/{{world}}'">Let's Go<i id="3" style="display: none" class="ml-2 fa fa-spinner fa-spin"></i></button>
+                <br><button type="button" class="btn btn-primary buttonload" onclick="loading('3'); location.href='/playersearch/{{world}}'">Open<i id="3" style="display: none" class="ml-2 fa fa-spinner fa-spin"></i></button>
               </div>
             </div>
-            <div class="card">
-              <img class="card-img-top" src="https://bcc53877d7aa0a135b9a-1452ca75bf8985207bb5b0c44a65ef28.ssl.cf4.rackcdn.com/Product-800x800/f0b5f557-0c04-4538-802c-ac6808448b6b.jpg" alt="Card image cap">
+            <div class="card"><br>
+              <img class="card-img-top" src="/img/dashboard/leaderboard_a.png" alt="Alliance Leaderboards"><br>
               <div class="card-body">
-                <h5 class="card-title">Card title <span class="badge badge-success">New!</span></h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <br><button class="btn btn-primary buttonload disabled" type="button" onclick="loading('4'); location.href='/test'">Let's Go<i id="4" style="display: none" class="ml-2 fa fa-spinner fa-spin"></i></button>
+                <h5 class="card-title">Alliance Leaderboards</h5>
+                <p class="card-text">Get the latest alliance leaderboards for {{world}} based on overall memberpoints and bash points.</p>
+                <button type="button" class="btn btn-primary buttonload" onclick="loading('2'); location.href='/allianceranking/{{world}}'">Open<i id="2" style="display: none" class="ml-2 fa fa-spinner fa-spin"></i></button>
+              </div>
+            </div>
+            <div class="card"><br><br>
+              <img class="card-img-top" src="/img/dashboard/alliancesearch.png" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Alliance Search <span class="badge badge-success">New!</span></h5>
+                <p class="card-text">Search for a specific alliance on {{world}} to get some detailed stats and other useful informations.</p>
+                <br><button class="btn btn-primary buttonload" type="button" onclick="loading('4'); location.href='/alliancesearch/{{world}}'">Open<i id="4" style="display: none" class="ml-2 fa fa-spinner fa-spin"></i></button>
               </div>
             </div>
           </div>

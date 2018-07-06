@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">GrepoGod</a>
+  <a class="navbar-brand" href="/dashboard/{{world}}">GrepoGod</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMobile" aria-controls="navbarMobile" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -19,23 +19,67 @@
         <a class="nav-link" href="#">Contact <span class="fa fa-comment"></span></a>
       </li>
     </ul>
+    {{#if user}}
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarMyWorlds" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="fa fa-globe"></span> My Worlds
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarMyWorlds">
-          <a class="dropdown-item disabled" href="/dashboard/de88">de88</a>
-          <a class="dropdown-item disabled" href="/dashboard/de89">de89</a>
-          <a class="dropdown-item disabled" href="/dashboard/de90">de90</a>
+          {{#each user.myworlds}}
+          <a class="dropdown-item" href="/dashboard/{{this}}">{{this}}</a>
+          {{/each}}
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><span class="fa fa-cogs"></span> Settings</a>
+        <a class="nav-link" href="/settings"><span class="fa fa-cogs"></span> Settings</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link"><span class="fa fa-user"></span> Username</a>
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" style="cursor : pointer" href="#" id="navbarUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span> {{user.username}}</a>
+        <div class="dropdown-menu" aria-labelledby="navbarUser">
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
       </li>
     </ul>
+    {{else}}
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" data-toggle="modal"  style="cursor : pointer" data-target="#loginModal"><span class="fa fa-user"></span> Login</a>
+      </li>
+    </ul>
+    {{/if}}
   </div>
 </nav>
+
+{{#if user}}{{else}}
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login to GrepoGod</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/login" method="post">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="inputEmail">Username</label>
+            <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <p class="text-muted mt-3 mr-5" style="font-size: 13px">Don't have an account? Register <a href="/signup">here</a>.</p>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{/if}}

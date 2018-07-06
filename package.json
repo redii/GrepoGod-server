@@ -1,7 +1,7 @@
 {
   "name": "grepogod-server",
   "version": "1.0.0",
-  "description": "An express.js powered webserver to hosts gathered world data, rankings and other related stuff on GrepoGod.com",
+  "description": "An express.js powered website to display analyzed grepolis world data gathered by the GrepoGod-daemon.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,9 +20,16 @@
   },
   "homepage": "https://github.com/redii/GrepoGod-server#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "handlebars.numeral": "^0.2.0",
     "hbs": "^4.0.1",
-    "mongoose": "^5.0.16"
+    "mongoose": "^5.0.16",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "validator": "^10.4.0"
   }
 }

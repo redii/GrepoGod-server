@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head}}
+
+<body>
+
+  {{> navbar}}
+
+  <div class="container">
+    <div class="row mt-5"></div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>Alliance Search for {{world}}</h1>
+        <p class="text-muted" style="font-size: 13px">You can go back to your dashboard by clicking <a href="/dashboard/{{world}}">here.</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-md-5"></div>
+      <div class="col-md-2">
+        <div class="form-inline">
+          <input class="form-control mr-2" type="search" placeholder="Enter Alliance" aria-label="Search" id="allianceSearchInput" autofocus>
+          <button class="btn btn-outline-primary" onclick="allianceSearch()" id="allianceSearchButton">Search</button>
+        </div>
+      </div>
+      <div class="col-md-5"></div>
+    </div>
+    {{#if alliance}}
+      <!-- if player object was given into handlebars add following html -->
+      <div class="row mt-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <p>{{alliance}}</p>
+        </div>
+        <div class="col-md-2"></div>
+    {{else}}
+      <div class="row mt-5">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+        {{#if notfound}}
+          <h3 class="font-weight-light text-center">The Alliance <strong>{{notfound}}</strong> doesn't exist on {{world}}.<br />Please enter a existing alliance to go on...<h3>
+        {{else}}
+          <h3 class="font-weight-light text-center">Enter a Alliance name to start...<h3>
+        {{/if}}
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    {{/if}}
+    </div>
+
+    {{> js}}
+    <!-- Load billboard.js with style -->
+    <script src="/js/billboard.min.js"></script>
+
+    <!-- Additional JS for player search -->
+    <script>
+      function allianceSearch() {
+        var name = document.getElementById('allianceSearchInput').value
+        window.location.href = `/alliancesearch/{{world}}/${name}`
+      }
+
+      var input = document.getElementById("allianceSearchInput")
+      input.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+          document.getElementById("allianceSearchButton").click();
+        }
+      })
+    </script>
+
+</body>
+
+</html>

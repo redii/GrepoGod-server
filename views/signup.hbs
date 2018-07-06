@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {{> head}}
+
+  <body>
+    <div class="container">
+      <div class="row" style="height: 200px">
+        {{#if userAlreadyExists}}
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+            <strong>Signup failed!</strong> Username or email-address already taken.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+        {{/if}}
+        {{#if emailValidationFailed}}
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+            <strong>Attempt failed!</strong> Your email-address seems to be invalid.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+        {{/if}}
+        {{#if dataMissing}}
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+            <strong>Attempt failed!</strong> Please enter all needed informations.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+        {{/if}}
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1>GrepoGod Registration</h1>
+          <p class="text-muted" style="font-size: 13px">You can go back to start by clicking <a href="/">here.</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row mt-3">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+          <div class="rounded">
+            <form action="/register" method="post">
+              <div class="form-group">
+                <label for="inputEmail">Username</label>
+                <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Username" autofocus>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <label for="inputEmail">E-Mail Address</label>
+                <input type="text" name="email" class="form-control" id="inputEmail" placeholder="user@example.com">
+              </div>
+              <div class="form-group">
+                <label for="inputWorld">World</label>
+                <select class="custom-select" name="world">
+                  {{#each worlds}}
+                  <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5"></div>
+      </div>
+    </div>
+
+    {{> js}}
+
+  </body>
+</html>

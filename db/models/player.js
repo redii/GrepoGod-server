@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 
 var Schema = mongoose.Schema
-var schema = new Schema({     // Mongoose ORM Schema
+var playerSchema = new Schema({     // Mongoose ORM Schema
   playerid: Number,
   name: String,
   allianceid: Number,
@@ -15,7 +15,7 @@ var schema = new Schema({     // Mongoose ORM Schema
   killsoff_activity: Number
 })
 
-module.exports = {schema}
+module.exports = {playerSchema}
 
 // https://stackoverflow.com/questions/13337155/mongoose-same-schema-for-different-collections-in-mongodb
 // To use the schema in daemon.js you have to set the mongoose.model like this...

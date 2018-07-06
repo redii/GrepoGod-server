@@ -2,41 +2,44 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  {{> head}}
+{{> head}}
 
-  <body>
+<body>
 
-    {{> navbar}}
+  {{> navbar}}
 
-    <div class="container">
-      <div class="row mt-5"></div>
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h1>Player Search for {{world}}</h1>
-          <p class="text-muted" style="font-size: 13px">You can go back to your dashboard by clicking <a href="/dashboard/{{world}}">here.</a></p>
-        </div>
+  <div class="container">
+    <div class="row mt-5"></div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>Player Search for {{world}}</h1>
+        <p class="text-muted" style="font-size: 13px">You can go back to your dashboard by clicking <a href="/dashboard/{{world}}">here.</a></p>
       </div>
     </div>
-    <div class="container-fluid">
-      <div class="row mt-3">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          <div class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Enter Username" aria-label="Search" id="playerSearchInput">
-            <button class="btn btn-outline-success my-2 my-sm-0" onclick="playerSearch()">Search</button>
-          </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-md-5"></div>
+      <div class="col-md-2">
+        <div class="form-inline">
+          <input class="form-control mr-2" type="search" placeholder="Enter Username" aria-label="Search" id="playerSearchInput" autofocus>
+          <button class="btn btn-outline-primary" onclick="playerSearch()" id="playerSearchButton">Search</button>
         </div>
-        <div class="col-md-4"></div>
       </div>
-      {{#if player}} <!-- if player object was given into handlebars add this html -->
+      <div class="col-md-5"></div>
+    </div>
+    {{#if player}}
+      <!-- if player object was given into handlebars add following html -->
       <div class="row mt-5">
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{#if pic}}https://{{world}}.grepolis.com/image.php?player_id={{player.playerid}}{{/if}}s" alt="{{player.name}}'s profile picture">
+            <img class="card-img-top" src="https://{{world}}.grepolis.com/image.php?player_id={{player.playerid}}" alt="{{player.name}}'s profile picture">
             <div class="card-body">
               <h5 class="card-title">{{player.name}}</h5>
-              <p class="card-text">He's currently rank <strong>#{{player.rank}}</strong> on {{world}}.<br>{{#if player.allianceid}}<a href="#">{{player.allianceid}}</a>{{/if}}</p>
+              <p class="card-text">... is currently rank <strong>#{{player.rank}}</strong> on {{world}}.<br>
+                {{#if player.allianceid}}<a href="#">{{player.allianceid}}</a>{{/if}}
+              </p>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">{{number player.points}} <strong>points</strong></li>
@@ -49,20 +52,62 @@
               <a href="#" class="card-link disabled">Grepolis Profile</a>
             </div>
           </div>
-          {{/if}}
+          <div id="chart"></div>
         </div>
         <div class="col-md-2"></div>
+    {{else}}
+      <div class="row mt-5">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+        {{#if notfound}}
+          <h3 class="font-weight-light text-center">The player <strong>{{notfound}}</strong> doesn't exist on {{world}}.<br />Please enter a existing user to go on...<h3>
+        {{else}}
+          <h3 class="font-weight-light text-center">Enter a player name to start...<h3>
+        {{/if}}
+        </div>
+        <div class="col-md-4"></div>
       </div>
+    {{/if}}
     </div>
 
     {{> js}}
+    <!-- Load billboard.js with style -->
+    <script src="/js/billboard.min.js"></script>
 
+    <!-- Additional JS for player search and billboard.js -->
     <script>
       function playerSearch() {
         var name = document.getElementById('playerSearchInput').value
         window.location.href = `/playersearch/{{world}}/${name}`
       }
+
+      var input = document.getElementById("playerSearchInput")
+      input.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+          document.getElementById("playerSearchButton").click();
+        }
+      })
+
+      bb.generate({
+          bindto: "#chart",
+          data: {
+              columns: [
+                  ["data1", 30, 200, 100, 170, 150, 250],
+                  ["data2", 130, 100, 140, 35, 110, 50]
+              ],
+              types: {
+                data1: "line",
+                data2: "area-spline"
+              },
+              colors: {
+                data1: "red",
+                data2: "green"
+              }
+          }
+      });
     </script>
 
-  </body>
+</body>
+
 </html>
