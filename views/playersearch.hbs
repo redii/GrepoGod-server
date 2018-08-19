@@ -32,27 +32,31 @@
       <!-- if player object was given into handlebars add following html -->
       <div class="row mt-5">
         <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-2">
           <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="https://{{world}}.grepolis.com/image.php?player_id={{player.playerid}}" alt="{{player.name}}'s profile picture">
             <div class="card-body">
-              <h5 class="card-title">{{player.name}}</h5>
-              <p class="card-text">... is currently rank <strong>#{{player.rank}}</strong> on {{world}}.<br>
-                {{#if player.allianceid}}<a href="#">{{player.allianceid}}</a>{{/if}}
-              </p>
+              <h5 class="card-title"><strong>{{player.name}}</strong></h5>
+              <p class="card-text">... is currently rank <strong>#{{lastOfArray player.rank}}</strong> on {{world}}.</p>
+              {{#if player.allianceid}}
+              <p>Alliance: <a href="/alliancesearch/{{world}}/{{player.alliancename}}">{{player.alliancename}}</a></p>
+              {{/if}}
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">{{number player.points}} <strong>points</strong></li>
-              <li class="list-group-item">{{number player.killsall}} <strong>bash</strong></li>
-              <li class="list-group-item">{{number player.killsoff}} <strong>bash off</strong></li>
-              <li class="list-group-item">{{number player.killsdef}} <strong>bash def</strong></li>
+              <li class="list-group-item">{{number (lastOfArray player.points)}} <strong>points</strong></li>
+              <li class="list-group-item">{{number (lastOfArray player.killsall)}} <strong>bash</strong></li>
+              <li class="list-group-item">{{number (lastOfArray player.killsoff)}} <strong>bash off</strong></li>
+              <li class="list-group-item">{{number (lastOfArray player.killsdef)}} <strong>bash def</strong></li>
             </ul>
             <div class="card-body">
-              <a href="#" class="card-link">Alliance Profile</a>
-              <a href="#" class="card-link disabled">Grepolis Profile</a>
+              <button type="button" class="btn btn-primary btn-sm">Points/Activity</button>
+              <button type="button" class="btn btn-primary btn-sm ml-4">Bash Statistics</button>
             </div>
           </div>
-          <div id="chart"></div>
+        </div>
+        <div class="col-md-6">
+          <div id="chart0"></div>
+          <div id="chart1"></div>
         </div>
         <div class="col-md-2"></div>
     {{else}}
@@ -90,11 +94,29 @@
       })
 
       bb.generate({
-          bindto: "#chart",
+          bindto: "#chart0",
           data: {
               columns: [
-                  ["data1", 30, 200, 100, 170, 150, 250],
-                  ["data2", 130, 100, 140, 35, 110, 50]
+                  ["player points"{{#each player.points}}, {{this}}{{/each}}],
+                  ["activity (points)"{{#each (activity player.points player.activity)}}, {{this}}{{/each}}],
+                  ["activity (killsoff)"]
+              ],
+              types: {
+                "player points": "spline",
+                "activity (points)": "area-step"
+              },
+              colors: {
+                data1: "red",
+                data2: "green"
+              }
+          }
+      })
+
+      bb.generate({
+          bindto: "#chart1",
+          data: {
+              columns: [
+                  ["data2", 7900822, 2906452, 4567456, 3205312, 3995318, 3902354]
               ],
               types: {
                 data1: "line",
@@ -105,7 +127,8 @@
                 data2: "green"
               }
           }
-      });
+      })
+
     </script>
 
 </body>

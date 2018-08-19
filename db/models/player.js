@@ -1,16 +1,20 @@
 var mongoose = require('mongoose')
-
 var Schema = mongoose.Schema
+
 var playerSchema = new Schema({     // Mongoose ORM Schema
   playerid: Number,
   name: String,
   allianceid: Number,
-  points: Number,
-  rank: Number,
-  towns: Number,
-  killsall: Number,
-  killsoff: Number,
-  killsdef: Number,
+  alliancename: String,
+  points: [Number],
+  rank: [Number],
+  towns: [Number],
+  killsall: [Number],
+  killsall_rank: Number,
+  killsoff: [Number],
+  killsoff_rank: Number,
+  killsdef: [Number],
+  killsdef_rank: Number,
   activity: Number,
   killsoff_activity: Number
 })

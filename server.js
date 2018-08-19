@@ -10,7 +10,7 @@ const passport          = require('passport')                 // for user authen
 const LocalStrategy     = require('passport-local').Strategy  // for using passports local strategy
 const bcrypt            = require('bcryptjs')                 // for password hashing
 const validator         = require('validator')                // for email input validation
-const numHelper         = require('handlebars.numeral')       // for number formating
+const numHelper         = require('handlebars.numeral')       // for number formatting
 const c                 = require('./config.json')            // for worlds variable
 const {mongoose}        = require('./db/mongoose.js')         // for mongodb connection
 const {playerSchema}    = require('./db/models/player.js')    // contains the mongoose orm model for "Player"
@@ -19,12 +19,21 @@ const User              = require('./db/models/user.js')      // exports the use
 
 // Express.js configuration + Some other stuff
 // ===========================================
-var app = express()                                       // Setup app variable
-app.use(express.static(__dirname + '/public'))            // register public directory
-hbs.registerPartials(__dirname + '/views/partials')       // register partials directory
-app.set('view engine', 'hbs')                             // set viewing engine to handlebars
+var app = express()                                           // Setup app variable
+app.use(express.static(__dirname + '/public'))                // register public directory
+hbs.registerPartials(__dirname + '/views/partials')           // register partials directory
+app.set('view engine', 'hbs')                                 // set viewing engine to handlebars
 
-numHelper.registerHelpers(hbs)                            // add handlebars.numeral as Helper
+numHelper.registerHelpers(hbs)                                // add handlebars.numeral as Helper
+hbs.registerHelper('lastOfArray', function (array) {          // handlebars helper to display current values
+    return new hbs.SafeString(array[array.length-1])          // returns last item of an array
+})
+hbs.registerHelper('activity', function (array, activitiy) {  // handlebars helper to display current values      ??? ERROR WHEN OFFLINE: "TypeError: C:\Github\GrepoGod-server\views\playersearch.hbs: Cannot read property length of undefined"
+    for (i = 0; i < (array.length - activitiy); ++i) {
+        array[i] = 0
+    }
+    return new hbs.SafeString(array)                          // returns last item of an array
+})
 
 // Passport.js configuration
 // http://toon.io/understanding-passportjs-authentication-flow/
@@ -213,6 +222,8 @@ app.get('/playerranking/:world', (req, res) => {         // http get /playerrank
         title: 'Playerranking'
       })
     }
+  }).catch((err) => {
+    console.log('testwqes')   // if db is offline after startup
   })
 })
 

@@ -35,13 +35,13 @@
             <tbody>
               {{#each player}}
               <tr>
-                <th class="text-center" scope="row">{{rank}}</th>
+                <th class="text-center" scope="row">{{lastOfArray rank}}</th>
                 <td><a href="/playersearch/{{../world}}/{{name}}">{{name}}</a></td>
-                <td class="text-center" data-toggle="tooltip" data-placement="bottom" title="{{number points}}">{{number points "0.0a"}}</td>
-                <td class="text-center">{{towns}}</td>
-                <td class="text-center" data-toggle="tooltip" data-placement="bottom" title="{{number killsall}}">{{number killsall "0.0a"}}</td>
-                <td class="text-center" data-toggle="tooltip" data-placement="bottom" title="{{number killsoff}}">{{number killsoff "0.0a"}}</td>
-                <td class="text-center" data-toggle="tooltip" data-placement="bottom" title="{{number killsdef}}">{{number killsdef "0.0a"}}</td>
+                <td class="text-center" data-toggle="tooltip" data-placement="bottom" title="{{number (lastOfArray points)}}">{{number (lastOfArray points) "0.0a"}}</td> <!-- {{number points "0.0a"}} -->
+                <td class="text-center">{{lastOfArray towns}}</td>
+                <td class="text-center" data-toggle="tooltip" data-placement="bottom" title="{{number (lastOfArray killsall)}}">{{number (lastOfArray killsall) "0.0a"}}</td>
+                <td class="text-center" data-toggle="tooltip" data-placement="bottom" title="{{number (lastOfArray killsoff)}}">{{number (lastOfArray killsoff) "0.0a"}}</td>
+                <td class="text-center" data-toggle="tooltip" data-placement="bottom" title="{{number (lastOfArray killsdef)}}">{{number (lastOfArray killsdef) "0.0a"}}</td>
               </tr>
               {{/each}}
             </tbody>
